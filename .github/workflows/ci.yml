@@ -5,6 +5,8 @@ on:
     types:
       - build-module
 
+run-name: build ${{ github.event.client_payload.module_name }}
+
 jobs:
   transpire-ci:
     uses: ocf/transpire/.github/workflows/module-ci.yml@main
