@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  repository_dispatch:
+    types:
+      - build-module
+
+jobs:
+  transpire-ci:
+    uses: ocf/transpire/.github/workflows/module-ci.yml@main
+    with:
+      module-name: ${{ github.event.client_payload.module_name }}
+    secrets:
+      HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
+      HARBOR_PASSWORD: ${{ secrets.HARBOR_PASSWORD }}
