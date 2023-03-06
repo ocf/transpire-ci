@@ -15,5 +15,5 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          repository: oliver-ni/transpire-ci
+          repository: ocf/transpire-ci
           event-type: build-module
