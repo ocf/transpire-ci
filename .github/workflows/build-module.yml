@@ -1,4 +1,4 @@
-name: CI
+name: Build Transpire Module
 
 on:
   repository_dispatch:

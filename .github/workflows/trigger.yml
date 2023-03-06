@@ -1,0 +1,19 @@
+name: Transpire Module CI
+
+on:
+  workflow_call:
+    inputs:
+      module-name:
+        required: true
+        type: string
+
+jobs:
+  build-module:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: oliver-ni/transpire-ci
+          event-type: build-module
