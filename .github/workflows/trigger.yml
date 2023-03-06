@@ -7,13 +7,20 @@ on:
         required: true
         type: string
 
+permissions:
+  actions: write
+
 jobs:
   build-module:
     runs-on: ubuntu-latest
     steps:
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v2
+      - name: Workflow Dispatch
+        uses: octokit/request-action@v2.x
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ocf/transpire-ci
-          event-type: build-module
+          route: POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches
+          owner: ocf
+          repo: transpire-ci
+          workflow_id: build-module.yml
+          inputs: '{"module-name": "${{ inputs.module-name }}"}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

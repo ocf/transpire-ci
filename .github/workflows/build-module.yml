@@ -1,17 +1,20 @@
 name: Build Transpire Module
 
 on:
-  repository_dispatch:
-    types:
-      - build-module
+  workflow_dispatch:
+    inputs:
+      module-name:
+        description: Name of transpire module to build
+        required: true
+        type: string
 
-run-name: build ${{ github.event.client_payload.module_name }}
+run-name: build ${{ inputs.module-name }}
 
 jobs:
   transpire-ci:
     uses: ocf/transpire/.github/workflows/module-ci.yml@main
     with:
-      module-name: ${{ github.event.client_payload.module_name }}
+      module-name: ${{ inputs.module-name }}
     secrets:
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
       HARBOR_PASSWORD: ${{ secrets.HARBOR_PASSWORD }}
