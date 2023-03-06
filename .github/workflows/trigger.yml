@@ -21,6 +21,7 @@ jobs:
           owner: ocf
           repo: transpire-ci
           workflow_id: build-module.yml
+          ref: master
           inputs: '{"module-name": "${{ inputs.module-name }}"}'
         env:
           GITHUB_TOKEN: ${{ secrets.TRANSPIRE_CI_PAT }}
