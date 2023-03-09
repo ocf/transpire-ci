@@ -22,6 +22,6 @@ jobs:
           repo: transpire-ci
           workflow_id: build-module.yml
           ref: master
-          inputs: '{"module-name": "${{ inputs.module-name }}"}'
+          inputs: '{"run-id": "${{ github.run_id }}", "module-name": "${{ inputs.module-name }}"}'
         env:
           GITHUB_TOKEN: ${{ secrets.TRANSPIRE_CI_PAT }}

@@ -3,12 +3,14 @@ name: Build Transpire Module
 on:
   workflow_dispatch:
     inputs:
+      run-id:
+        description: Run ID of the triggering workflow
       module-name:
         description: Name of transpire module to build
         required: true
         type: string
 
-run-name: build ${{ inputs.module-name }}
+run-name: build ${{ inputs.module-name }} (${{ inputs.run-id }})
 
 jobs:
   transpire-ci:
