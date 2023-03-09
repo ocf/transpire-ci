@@ -3,7 +3,7 @@ name: Transpire Module CI
 on:
   workflow_call:
     inputs:
-      module-name:
+      module_name:
         required: true
         type: string
     secrets:
@@ -14,14 +14,12 @@ jobs:
   build-module:
     runs-on: ubuntu-latest
     steps:
-      - name: Workflow Dispatch
-        uses: octokit/request-action@v2.x
+      - uses: actions/setup-python@v4
         with:
-          route: POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches
-          owner: ocf
-          repo: transpire-ci
-          workflow_id: build-module.yml
-          ref: master
-          inputs: '{"run-id": "${{ github.run_id }}", "module-name": "${{ inputs.module-name }}"}'
+          python-version: "3.11"
+      - name: Run CI
+        run: python ./.github/workflows/trigger.py
         env:
+          RUN_ID: ${{ github.run_id }}
+          MODULE_NAME: ${{ inputs.module_name }}
           GITHUB_TOKEN: ${{ secrets.TRANSPIRE_CI_PAT }}
