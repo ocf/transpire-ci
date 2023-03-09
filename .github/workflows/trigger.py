@@ -95,7 +95,7 @@ def main():
         time.sleep(2)
     else:
         print("[ERROR] Could not find triggered workflow run")
-        return
+        sys.exit(1)
 
     text = f"Found run with id {triggered_run['id']}"
 
@@ -115,7 +115,7 @@ def main():
         triggered_run = get_run(triggered_run["id"])
         if triggered_run is None:
             print(f"[ERROR] Run not found")
-            return
+            sys.exit(1)
 
     print("Run concluded with status:", triggered_run["conclusion"])
 
