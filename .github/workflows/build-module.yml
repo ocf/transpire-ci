@@ -3,20 +3,20 @@ name: Build Transpire Module
 on:
   workflow_dispatch:
     inputs:
-      run-id:
+      run_id:
         description: Run ID of the triggering workflow
-      module-name:
+      module_name:
         description: Name of transpire module to build
         required: true
         type: string
 
-run-name: build ${{ inputs.module-name }} (${{ inputs.run-id }})
+run-name: build ${{ inputs.module_name }} (${{ inputs.run_id }})
 
 jobs:
   transpire-ci:
     uses: ocf/transpire/.github/workflows/module-ci.yml@main
     with:
-      module-name: ${{ inputs.module-name }}
+      module_name: ${{ inputs.module_name }}
     secrets:
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
       HARBOR_PASSWORD: ${{ secrets.HARBOR_PASSWORD }}
