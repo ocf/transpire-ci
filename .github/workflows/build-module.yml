@@ -20,3 +20,4 @@ jobs:
     secrets:
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
       HARBOR_PASSWORD: ${{ secrets.HARBOR_PASSWORD }}
+      OCF_CLUSTER_DEPLOY_KEY: ${{ secrets.OCF_CLUSTER_DEPLOY_KEY }}
