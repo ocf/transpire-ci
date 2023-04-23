@@ -71,7 +71,7 @@ def find_triggered_run():
     result = request("/repos/{owner}/{repo}/actions/runs", params=params, query=query)
     if result is None:
         return None
-    name_re = re.compile(rf"build .+ \({re.escape(os.environ['RUN_ID'])}\)")
+    name_re = re.compile(rf"build .* \({re.escape(os.environ['RUN_ID'])}\)")
     try:
         return next(x for x in result["workflow_runs"] if re.match(name_re, x["name"]))
     except StopIteration:
