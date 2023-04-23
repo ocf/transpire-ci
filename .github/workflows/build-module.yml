@@ -7,17 +7,24 @@ on:
         description: Run ID of the triggering workflow
       module_name:
         description: Name of transpire module to build
-        required: true
+        required: false
         type: string
 
 run-name: build ${{ inputs.module_name }} (${{ inputs.run_id }})
 
 jobs:
-  transpire-ci:
+  module-ci:
+    if: ${{ inputs.module_name != '' }}
     uses: ocf/transpire/.github/workflows/module-ci.yml@main
     with:
       module_name: ${{ inputs.module_name }}
     secrets:
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
       HARBOR_PASSWORD: ${{ secrets.HARBOR_PASSWORD }}
+      OCF_CLUSTER_DEPLOY_KEY: ${{ secrets.OCF_CLUSTER_DEPLOY_KEY }}
+
+  cluster-ci:
+    if: ${{ inputs.module_name == '' }}
+    uses: ocf/transpire/.github/workflows/cluster-ci.yml@main
+    secrets:
       OCF_CLUSTER_DEPLOY_KEY: ${{ secrets.OCF_CLUSTER_DEPLOY_KEY }}
