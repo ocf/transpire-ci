@@ -10,6 +10,9 @@ on:
         required: false
         type: string
 
+permissions:
+  packages: write
+
 run-name: build ${{ inputs.module_name }} (${{ inputs.run_id }})
 
 jobs:
